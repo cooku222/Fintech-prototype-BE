@@ -1,4 +1,4 @@
-package com.fintechauth.service;
+package com.example.fintechauth.service;
 
 import org.springframework.stereotype.Service;
 

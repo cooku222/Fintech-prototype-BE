@@ -1,10 +1,11 @@
-package com.fintechauth.controller;
+package com.example.fintechauth.controller;
 
-import com.fintechauth.dto.*;
-import com.fintechauth.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.fintechauth.dto.*;
+import com.example.fintechauth.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")

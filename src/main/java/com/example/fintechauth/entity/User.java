@@ -1,4 +1,4 @@
-package com.fintechauth.entity;
+package com.example.fintechauth.entity;
 
 import jakarta.persistence.*;
 

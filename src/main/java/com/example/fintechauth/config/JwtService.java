@@ -1,10 +1,11 @@
-package com.fintechauth.config;
+package com.example.fintechauth.config;
 
-import com.fintechauth.entity.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.example.fintechauth.entity.User;
 
 import java.security.Key;
 import java.util.Date;

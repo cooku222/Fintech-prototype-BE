@@ -1,9 +1,10 @@
-package com.fintechauth.controller;
+package com.example.fintechauth.controller;
 
-import com.fintechauth.entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.fintechauth.entity.User;
 
 @RestController
 @RequestMapping("/api/user")

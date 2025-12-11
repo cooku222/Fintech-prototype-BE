@@ -1,12 +1,13 @@
-package com.fintechauth.service;
+package com.example.fintechauth.service;
 
-import com.fintechauth.config.JwtService;
-import com.fintechauth.dto.*;
-import com.fintechauth.entity.Role;
-import com.fintechauth.entity.User;
-import com.fintechauth.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.fintechauth.config.JwtService;
+import com.example.fintechauth.dto.*;
+import com.example.fintechauth.entity.Role;
+import com.example.fintechauth.entity.User;
+import com.example.fintechauth.repository.UserRepository;
 
 @Service
 public class AuthService {
