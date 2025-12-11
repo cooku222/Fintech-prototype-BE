@@ -1,6 +1,6 @@
-package com.example.fintechauth.config;
+package com.fintechauth.config;
 
-import com.example.fintechauth.entity.User;
+import com.fintechauth.entity.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;

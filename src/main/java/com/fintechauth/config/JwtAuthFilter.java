@@ -1,7 +1,7 @@
-package com.example.fintechauth.config;
+package com.fintechauth.config;
 
-import com.example.fintechauth.entity.User;
-import com.example.fintechauth.repository.UserRepository;
+import com.fintechauth.entity.User;
+import com.fintechauth.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

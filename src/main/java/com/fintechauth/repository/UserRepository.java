@@ -1,6 +1,6 @@
-package com.example.fintechauth.repository;
+package com.fintechauth.repository;
 
-import com.example.fintechauth.entity.User;
+import com.fintechauth.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

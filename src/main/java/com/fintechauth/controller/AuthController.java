@@ -1,7 +1,7 @@
-package com.example.fintechauth.controller;
+package com.fintechauth.controller;
 
-import com.example.fintechauth.dto.*;
-import com.example.fintechauth.service.AuthService;
+import com.fintechauth.dto.*;
+import com.fintechauth.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

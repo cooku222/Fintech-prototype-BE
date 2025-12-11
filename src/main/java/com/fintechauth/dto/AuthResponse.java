@@ -1,4 +1,4 @@
-package com.example.fintechauth.dto;
+package com.fintechauth.dto;
 
 public class AuthResponse {
 
