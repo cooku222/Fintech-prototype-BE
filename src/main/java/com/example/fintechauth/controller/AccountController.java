@@ -19,20 +19,20 @@ public class AccountController {
         this.accountRepository = accountRepository;
     }
 
-    // 🔐 패치된(안전한) 버전: 계좌 소유자 검증 포함
+    // 패치된(안전한) 버전: 계좌 소유자 검증 포함
     @GetMapping("/{id}")
     public ResponseEntity<AccountResponse> getAccountById(
             @PathVariable Long id,
             Authentication authentication   // 현재 로그인한 사용자 정보
     ) {
-        // 1. 현재 로그인한 사용자 이메일(= JWT subject) 가져오기
+        // 1. 현재 로그인한 사용자 이메일 가져오기
         String currentEmail = authentication.getName();
 
         // 2. 요청된 계좌 조회
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
 
-        // 3. 계좌 소유자와 현재 로그인 사용자 비교 (IDOR 방어 핵심)
+        // 3. IDOR 패치
         if (!account.getOwner().getEmail().equals(currentEmail)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
