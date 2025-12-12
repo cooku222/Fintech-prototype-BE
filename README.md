@@ -7,8 +7,8 @@
 - Java / Spring Boot
 - Spring Web / Spring Security
 - JPA (Hibernate)
-- DB: H2 (dev) / MySQL (prod)
-- Build: Gradle(or Maven)
+- DB: H2 -> MySQL
+- Build: Maven
 
 ## Features
 - 회원가입 / 로그인
@@ -20,7 +20,7 @@
 
 ### 1) Requirements
 - JDK 17+ (권장)
-- MySQL (선택, 로컬은 H2로도 실행 가능)
+- MySQL 
 
 ### 2) Run (Local)
 ```bash
