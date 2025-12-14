@@ -29,7 +29,9 @@ public class AccountController {
             @AuthenticationPrincipal User user,
             Authentication authentication   // 현재 로그인한 사용자 정보
     ) {
-
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
         // 1. 요청된 계좌 조회
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
