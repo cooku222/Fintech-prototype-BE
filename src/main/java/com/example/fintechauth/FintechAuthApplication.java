@@ -27,7 +27,7 @@ public class FintechAuthApplication {
         return args -> {
             if (userRepository.count() == 0) {
 
-                // 유저 2명 생성
+                // 유저 더미데이터 생성
                 User alice = new User(
                         "Alice",
                         "alice@test.com",
@@ -41,7 +41,7 @@ public class FintechAuthApplication {
                         passwordEncoder.encode("bob1234!"),
                         Role.USER
                 );
-
+                // 관리자용 더미 데이터 생성
                 User admin = new User(
                         "Admin",
                         "admin@test.com",
