@@ -53,4 +53,22 @@ public class AccountController {
 
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/{id}/my")
+    public ResponseEntity<AccountResponse> myAccount(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+    // 유저의 계좌를 찾아서 반환 (현재는 "1인 1계좌" 가정)
+        Account account = accountRepository.findFirstByOwner_Email(user.getEmail())
+            .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
+
+        return ResponseEntity.ok(new AccountResponse(
+            account.getId(),
+            account.getAccountNumber(),
+            account.getBalance(),
+            account.getOwner().getEmail()
+        ));
+    }
+
 }
