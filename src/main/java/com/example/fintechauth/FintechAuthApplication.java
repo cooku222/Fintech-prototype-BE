@@ -47,7 +47,7 @@ public class FintechAuthApplication {
                         "admin@test.com",
                         passwordEncoder.encode("admin1234!"),
                         Role.ADMIN
-                )
+                );
 
                 userRepository.save(alice);
                 userRepository.save(bob);
