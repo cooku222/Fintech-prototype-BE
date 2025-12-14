@@ -29,10 +29,8 @@ public class AccountController {
             @AuthenticationPrincipal User user,
             Authentication authentication   // 현재 로그인한 사용자 정보
     ) {
-        // 1. 현재 로그인한 사용자 이메일 가져오기
-        String currentEmail = authentication.getName();
 
-        // 2. 요청된 계좌 조회
+        // 1. 요청된 계좌 조회
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
 
@@ -43,7 +41,7 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        // 4. 본인 계좌일 때만 응답
+        // 2. 본인 계좌일 때만 응답
         AccountResponse response = new AccountResponse(
                 account.getId(),
                 account.getAccountNumber(),

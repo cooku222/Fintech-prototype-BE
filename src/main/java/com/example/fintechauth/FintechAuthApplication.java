@@ -41,7 +41,8 @@ public class FintechAuthApplication {
                         passwordEncoder.encode("bob1234!"),
                         Role.USER
                 );
-                // 관리자용 더미 데이터 생성
+                
+                // 관리자용 더미데이터 생성
                 User admin = new User(
                         "Admin",
                         "admin@test.com",
