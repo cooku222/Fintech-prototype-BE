@@ -32,6 +32,10 @@ public class AccountController {
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
 
+        // 3. IDOR 패치
+        if (!account.getOwner().getEmail().equals(currentEmail)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
         // 4. 본인 계좌일 때만 응답
         AccountResponse response = new AccountResponse(
