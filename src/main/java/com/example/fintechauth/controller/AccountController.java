@@ -2,13 +2,8 @@ package com.example.fintechauth.controller;
 
 import com.example.fintechauth.dto.AccountResponse;
 import com.example.fintechauth.entity.Account;
-import com.example.fintechauth.entity.User;
 import com.example.fintechauth.repository.AccountRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,28 +17,16 @@ public class AccountController {
         this.accountRepository = accountRepository;
     }
 
-    // 패치된(안전한) 버전: 계좌 소유자 검증 포함
+    // ⚠️ 취약점 포인트: 본인 소유 확인 로직 제거 + URL로 ID 직접 입력 가능
+    // 기존: @GetMapping("/my") -> 변경: @GetMapping("/{id}")
     @GetMapping("/{id}")
-    public ResponseEntity<AccountResponse> getAccountById(
-            @PathVariable Long id,
-            @AuthenticationPrincipal User user,
-            Authentication authentication   // 현재 로그인한 사용자 정보
-    ) {
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-        // 1. 요청된 계좌 조회
+    public ResponseEntity<AccountResponse> getAccountById(@PathVariable Long id) {
+        
+        // 1. 요청된 ID로 계좌를 조회 (소유자 체크 없음)
         Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
 
-        boolean isAdmin = authentication.getAuthorities()
-                .contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
-
-        if (!isAdmin && !account.getOwner().getEmail().equals(user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        // 2. 본인 계좌일 때만 응답
+        // 2. 결과 반환
         AccountResponse response = new AccountResponse(
                 account.getId(),
                 account.getAccountNumber(),
@@ -53,22 +36,4 @@ public class AccountController {
 
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/{id}/my")
-    public ResponseEntity<AccountResponse> myAccount(@AuthenticationPrincipal User user) {
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-    // 유저의 계좌를 찾아서 반환 (현재는 "1인 1계좌" 가정)
-        Account account = accountRepository.findFirstByOwner_Email(user.getEmail())
-            .orElseThrow(() -> new RuntimeException("계좌를 찾을 수 없습니다."));
-
-        return ResponseEntity.ok(new AccountResponse(
-            account.getId(),
-            account.getAccountNumber(),
-            account.getBalance(),
-            account.getOwner().getEmail()
-        ));
-    }
-
 }
